@@ -6,7 +6,7 @@ import itertools
 import numpy as np
 
 
-with open('hoaxpagedict.json') as pagedatafile:
+with open('accountClassification.json') as pagedatafile:
     hoaxpagedict = json.load(pagedatafile)
 
 pages_hoax = [pageid for pageid in hoaxpagedict.keys() if hoaxpagedict[pageid]]

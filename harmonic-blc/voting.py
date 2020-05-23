@@ -202,7 +202,7 @@ class VotingGraph(object):
     def get_item(self, item_id):
         return self.items.get(item_id)
 
-    def perform_inference(self, num_iterations=5):
+    def perform_inference(self, num_iterations=8):
         """Performs inference on the graph."""
         for u in self.users.values():
             u.initialize()
@@ -262,7 +262,7 @@ class VotingGraph(object):
                 run_correct += tot_cor[1]
             run_ratio = run_correct / run_total
             ratios.append(run_ratio)
-            print "One run result:", run_ratio
+#             print "One run result:", run_ratio
         # Computes the averages.
         ratio_correct = correct / tot
         return dict(

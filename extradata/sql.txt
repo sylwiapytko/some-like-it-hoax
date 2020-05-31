@@ -1,0 +1,30 @@
+RETWEETS PER TWEET
+
+select u.screen_name, (sum(t.retweet_count)::float / count(t.tweet_id)::float) as srednia
+from public.twitter_tweet_retweeter r
+join public.twitter_tweet t
+on t.tweet_id = r.tweet_id
+join public.twitter_user u
+on u.user_id= t.user_id
+where  u.account_classification <> 'GEMIUS_OCT'
+and t.created_at > '2020-03-13'
+		and t.created_at < '2020-04-13'
+group by u.screen_name, u.followers_count,statuses_fetched_count
+order by srednia desc
+
+
+TWEETS PER DAY
+
+SELECT 
+ 	round(sum(t.retweet_count)/30.0,1) AS count 
+  	, u.screen_name
+ FROM public.twitter_tweet t
+ join twitter_user u
+  	on u.user_id =t.user_id
+ 	where t.created_at > '2020-03-13'
+		and t.created_at < '2020-04-13'
+	and t.retweet = false
+	and u.account_classification <> 'GEMIUS_OCT'
+	
+ GROUP BY u.screen_name
+ 	order by count desc
